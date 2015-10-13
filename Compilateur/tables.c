@@ -1,7 +1,7 @@
 //table des correspondances
 
-void initialiserTableCorrespondance(char tableCorrespondance[]){
-    tableCorrespondance[0] = "a";
+void initialiserTableCorrespondance(){
+    tableCorrespondance[0] = 'a';
     tableCorrespondance[1] = 'b';
     tableCorrespondance[2] = 'c';
     tableCorrespondance[3] = 'd';
@@ -43,3 +43,4 @@ void initialiserTableCorrespondance(char tableCorrespondance[]){
 
 void initialiserTableLexicale(char table[]){
 //TODO
+}

@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <tables.c>
 //Inclusion des fichiers annexes :
 
 
@@ -16,6 +15,7 @@ char tableCorrespondance[36];
 char tableLexicale[26][26];
 //TODO
 
+#include <tables.c>
 
 int main(int argc, char *argv[])
 {
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     }
 
     //Initialisation des tables
-    initialiserTableCorrespondance(*tableLexicale);
+    initialiserTableCorrespondance();
 
     //Initialisation du tableau de rendu
     tableauRenduFinal = "Ce n'est pas normal que ceci soit affiché";
@@ -46,21 +46,21 @@ int main(int argc, char *argv[])
         chaineActuelle = argv[i];
 
         //Décomposition de l'argument caractère par caractère
-        for( int j = 0; strcmp(chaineActuelle[j], '/0') == 0; j++){
+        for( int j = 0; chaineActuelle[j] == '/0'; j++){
             caractereActuel = chaineActuelle[j];
 
             //On cherche à quelle ligne se trouve le caractère dans la table lexicale :
-            for (indexCaracActuel = 0; caractereActuel == tableCorrespondance[indexCaracActuel]; indexCaracActuel++) //Cas de caractère non présent dans la table non géré !
+            for (indexCaracActuel = 0; caractereActuel == tableCorrespondance[indexCaracActuel] || indexCaracActuel > 26; indexCaracActuel++); //Cas de caractère non présent dans la table non géré !
 
             //recherche des caractères suivants possibles dans la table lexicale
-                for(int colonne = 0; colonne < 26; colonne ++){
-                        if(tableLexicale[indexCaracActuel][colonne] == 1)
+            for(int colonne = 0; colonne < 26; colonne ++){
+                if(tableLexicale[indexCaracActuel][colonne] == 1){
 
-                        printf("TODO");
-                        exit(0);
-                    }
+                    printf("TODO");
+                    exit(0);
                 }
             }
+        }
         //on vérifie si le mot a été reconnu
         if(motReconnu != 0)
             //mot reconnu :
@@ -73,8 +73,8 @@ int main(int argc, char *argv[])
         //on ajoute le mot à l'ffichage final
         tableauRenduFinal = strcat(tableauRenduFinal, chaineActuelle);
         tableauRenduFinal = strcat(tableauRenduFinal, '\n'); //On rajoute '\n' afin de ne pas avoir à gérer les retours à la ligne
-
+    }
     printf('Voici les mots reconnus par le programme : \n \n');
     //printf("%c", &tableau);
-    exit(0);
+    return 0;
 }
